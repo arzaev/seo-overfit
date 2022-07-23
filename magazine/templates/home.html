@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="bg-primary" id="content-desktop">
+	<div class="bg-pattern bg-black-op-25" style="background-image: url('/static/media/photos/header8.jpeg'); background-size: 100%;">
+		<div class="content content-top text-center">
+			<div class="py-50">
+				<h1 class="font-w700 text-white mb-10">OverFitness</h1>
+				<h2 class="h4 font-w400 text-white-op" >Твой путеводитель в мире фитнесса</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="row items-push py-15">
+		<div class="col-xl-8">
+			{% for article in articles %}
+				<a class="block block-link-pop" href="{% url 'article' article.article_slug %}">
+				<div class="block">
+					<div class="bg-image" style="background-image: url('{{article.article_header_image_url}}');">
+						<div class="block-content block-content-full bg-black-op ribbon ribbon-left ribbon-bottom ribbon-crystal">
+							<div class="ribbon-box">
+									<i class="fa fa-fw fa-calendar mr-5"></i>{{article.article_published|date:"M d,Y"}}
+							</div>
+							<div class="text-center py-50">
+								<h4 class="font-w700 text-white text-uppercase mb-0">{{article.article_title}}</h4>
+									<h5 class="h5 font-w400 text-white-op">{{article.article_description|safe}}</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+				</a>
+			{% endfor %}
+			{% include 'pagination_home.html' %}
+                            <hr class="d-xl-none">
+                        </div>
+                        <div class="col-xl-4">
+							<div class="">
+								<script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+								<div id="vk_groups" class="block"></div>
+								<script type="text/javascript">
+									VK.Widgets.Group("vk_groups", {mode: 1, width: 309}, 51280788);
+								</script>
+							</div>
+                    </div>
+                </div>
+{% endblock %}
+

@@ -14,7 +14,7 @@ class ArticleCategory(models.Model):
 
 class ArticleSubCategory(models.Model):
     article_subcategory = models.CharField(max_length=255, unique=True)
-    subcategory_slug = models.SlugField(max_length=255, unique=True)
+    subcategory_slug = models.SlugField(max_length=255, unique=True, db_index=True)
     article_category = models.ForeignKey(ArticleCategory,
                                          verbose_name="Category",
                                          on_delete=models.CASCADE
@@ -26,13 +26,20 @@ class ArticleSubCategory(models.Model):
     def __str__(self):
         return self.article_subcategory
 
+    def get_absolute_url(self):
+        return reverse('', kwargs={'slug': self.subcategory_slug})
+
 
 class Tag(models.Model):
     article_tag = models.CharField(max_length=255, unique=True)
-    tag_slug = models.SlugField(max_length=255, unique=True)
+    tag_slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
 
     def __str__(self):
         return self.tag_slug
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'slug': self.tag_slug})
 
 
 class Article(models.Model):
@@ -48,7 +55,8 @@ class Article(models.Model):
                                             on_delete=models.CASCADE
                                             )
     article_slug = models.SlugField(max_length=255,
-                                    unique=True)
+                                    unique=True,
+                                    db_index=True)
     article_tags = models.ManyToManyField(Tag)
     is_public = models.BooleanField(default=False)
 
@@ -57,6 +65,9 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse('article', kwargs={'slug': self.article_slug})
+
+    class Meta:
+        ordering = ['-id']
 
 
 class Image(models.Model):

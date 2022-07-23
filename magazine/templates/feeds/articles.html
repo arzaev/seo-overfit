@@ -1,0 +1,8 @@
+
+
+{% for image in images %}
+	{% if image.article_title == obj.article_title %}
+	<img src="{{ obj.article_header_image_url }}" alt="header_article" width="900" height="476">
+	{% endif %}
+{% endfor %}
+{{ obj.article_content|safe }}

@@ -8,7 +8,7 @@ from .models import Article, ArticleCategory, ArticleSubCategory, Tag, Image, Cl
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'article_title', 'article_slug', 'article_published')
+    list_display = ('id', 'article_title', 'article_slug', 'is_public')
     fieldsets = [
         ("Meta", {"fields": ["meta_title"]}),
         ("Title/date", {"fields": ["article_slug",
@@ -21,6 +21,7 @@ class ArticleAdmin(admin.ModelAdmin):
         ("Tags", {"fields": ["article_tags"]}),
         ("Public", {"fields": ["is_public"]}),
     ]
+    prepopulated_fields = {"article_slug": ("article_title", )}
 
     #     formfield_overrides = {
     #     models.TextField: {'widget': TinyMCE()}

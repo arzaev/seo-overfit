@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+                <div class="bg-image" style="background-image: url('{{ article.article_header_image_url }}'); max-width: 100%;">
+                    <div class="bg-black-op-75">
+                        <div class="content content-top text-center">
+                            <div class="py-100">
+                                <h1 class="font-w700 text-white mb-10">{{ article.article_title }}</h1>
+                                <h2 class="h4 font-w400 text-white-op">{{ article.article_description|safe }}</h2>
+                                <div class="font-size-md text-muted">
+                                     • {{ article.article_published|date:"M d, Y" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="article-size">
+				<div class="row col-md-12">
+				<div class="col-md-9">
+					<div class="block article-block">
+						<div class="block-content">
+							{{ article.article_content|safe }}
+							<div class="block-content row">
+							<p>теги:</p> 
+							{% for tag in article.article_tags.all %}
+									<div class="col-lg-1 text-center">
+										<a href="{% url 'tag' tag.tag_slug %}">{{tag.article_tag}}</a>
+									</div>
+							{% endfor %}
+							</div>
+							<div class="block-content">
+								<div id="share">
+								<div class="social">		
+									<a class="bg-white push facebook" data-id="fb"><i class="fa fa-facebook"></i> Facebook</a>
+									<a class="bg-white push vkontakte" data-id="vk"><i class="fa fa-vk"></i> Вконтакте</a>
+									<a class="bg-white push twitter" data-id="tw"><i class="fa fa-twitter"></i> Twitter</a>
+								</div>
+								</div>
+							</div>
+						<div class="block-content">
+
+							<div id="disqus_thread"></div>
+							<script>
+
+							var disqus_config = function () {
+							this.page.url = '{{absolute_url}}';
+							this.page.identifier = '{{uniq_slug}}';
+							};
+							
+							(function() { // DON'T EDIT BELOW THIS LINE
+							var d = document, s = d.createElement('script');
+							s.src = 'https://overfitness.disqus.com/embed.js';
+							s.setAttribute('data-timestamp', +new Date());
+							(d.head || d.body).appendChild(s);
+							})();
+							</script>
+							<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+					<div id="vk_groups" class="block"></div>
+					<script type="text/javascript">
+						VK.Widgets.Group("vk_groups", {mode: 3, width: 215.5}, 51280788);
+					</script>
+					{% if is_similar_articles %}
+					<div class="block article-block">
+						<div class="block-header block-header-default">
+							<h3 class="block-title">Схожие статьи</h3>
+						</div>
+						<div class="block-content">
+						{% for article in similar_articles %}
+							<a class="block block-link-pop" href="{% url 'article' article.article_slug %}">
+								<div class="block">
+									<div class="bg-image" style="background-image: url('{{article.article_header_image_url}}');">
+										<div class="block-content block-content-full bg-black-op ribbon ribbon-left ribbon-bottom ribbon-crystal">
+											<div class="ribbon-box">
+													<i class="fa fa-fw fa-calendar mr-5"></i>{{article.article_published|date:"M d,Y"}}
+											</div>
+											<div class="text-center py-50">
+												<p class="font-w200 text-white text-uppercase mb-0">{{article.article_title}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						{% endfor %}
+						</div>
+
+					</div>
+					{% endif %}
+					</div>
+				</div>
+				</div>
+{% endblock %}

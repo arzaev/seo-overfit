@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" class="no-focus">
+    <head>
+        <title>{{title}}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta name="description" content="{{description}}">
+	{% block stylesheet %}
+		{% load static %}
+		<link rel="shortcut icon" href="/favicon.png" type="image/png">
+		<link rel="apple-touch-icon" sizes="57x57" href="/static/media/favicons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/static/media/favicons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/static/media/favicons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/static/media/favicons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/static/media/favicons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/static/media/favicons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/static/media/favicons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/static/media/favicons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/static/media/favicons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/static/media/favicons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/static/media/favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/static/media/favicons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/static/media/favicons/favicon-16x16.png">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/static/media/favicons/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
+        <link rel="stylesheet" id="css-main" href="/static/css/overfitness.min.css">
+	{% endblock %}
+		<meta name="google-site-verification" content="uhkpcHXJYhk12X6bxrNBVWSOiaANz8Cvm0qOLP_si80" />
+
+		<!-- Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140601405-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-140601405-1');
+		</script>
+		<!-- /Google Analytics -->
+
+
+		<meta name="yandex-verification" content="ed9c5a5058811d32" />
+
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript" >
+		   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+		   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+		   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+		   ym(53739575, "init", {
+				clickmap:true,
+				trackLinks:true,
+				accurateTrackBounce:true
+		   });
+		</script>
+		<noscript><div><img src="https://mc.yandex.ru/watch/53739575" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+
+    </head>
+    <body>
+        <div id="page-container" class="sidebar-o side-scroll page-header-modern main-content-boxed enable-page-overlay">
+
+            <nav id="sidebar">
+                <div class="sidebar-content">
+                    <div class="content-header content-header-fullrow px-15">
+                        <div class="content-header-section sidebar-mini-visible-b">
+                            <span class="content-header-item font-w700 font-size-xl float-left animated fadeIn">
+                                <span class="text-dual-primary-dark">o</span><span class="text-primary">f</span>
+                            </span>
+                        </div>
+                        <div class="content-header-section text-center align-parent sidebar-mini-hidden">
+                            <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout" data-action="sidebar_close">
+                                <i class="fa fa-times text-danger"></i>
+                            </button>
+
+                            <div class="content-header-item">
+                                <a class="link-effect font-w700" href="/">
+                                    <i class="fa fa-sport text-primary"></i>
+                                    <span class="font-size-xl text-dual-primary-dark">Over</span><span class="font-size-xl text-primary">Fitness</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-side content-side-full">
+                        <ul class="nav-main">
+                            <li class="nav-main-heading text-dual-primary-dark">
+                                <span class="text-primary-darker">Общее</span>
+                            </li>
+                            <li>
+                                <a class="link-effect" href="/">
+                                    <span class="sidebar-mini-hide">Главная Страница</span>
+                                </a>
+                            </li>
+						{% for category in categories %}
+                            <li class="nav-main-heading">
+                                <span class="sidebar-mini-hidden">{{category}}</span>
+                            </li>
+							{% for subcategory in category.articlesubcategory_set.all %}
+                            <li>
+                                <a class="link-effect" href="{% url 'subcategory' subcategory.subcategory_slug %}">
+                                    <span class="sidebar-mini-hide">{{subcategory}}</span>
+                                </a>
+                            </li>
+							{% endfor %}
+						{% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+						<button type="button" class="btn btn-circle btn-dual-secondary mobileShow" data-toggle="layout" data-action="sidebar_toggle">
+                            <i class="fa fa-navicon"></i>
+                        </button>
+            <main id="main-container">
+					{% block content %}
+
+
+					
+					{% endblock %}			
+            </main>
+            <footer id="page-footer" class="opacity-0">
+                <div class="content py-20 font-size-xs clearfix">
+                    <!--<div class="float-right">
+                        Crafted with <i class="fa fa-heart text-pulse"></i> by <a class="font-w600" href="/" target="_blank">Technicolor</a>
+                    </div>-->
+                    <div class="float-left">
+                        <a class="font-w600" href="/" target="_blank">overfitness</a> &copy; <span class="js-year-copy"></span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="/static/js/codebase.core.min.js"></script>
+        <script src="/static/js/codebase.app.min.js"></script>
+		<script src="/static/js/overfitness.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-messaging.js"></script>
+
+		
+    </body>
+</html>
