@@ -49,6 +49,7 @@ class Article(models.Model):
     article_title = models.CharField(max_length=255)
     article_content = models.TextField()
     article_published = models.DateTimeField(verbose_name="date published",
+                                                auto_now_add=True
                                             )
     article_subcategory = models.ForeignKey(ArticleSubCategory,
                                             verbose_name="Sub Category",
