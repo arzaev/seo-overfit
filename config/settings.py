@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'magazine.apps.MagazineConfig',
     'debug_toolbar',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
